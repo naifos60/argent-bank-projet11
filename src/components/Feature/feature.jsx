@@ -1,0 +1,13 @@
+function Feature({children, title, content}){
+    return(
+            <div className="feature-item">
+                {children}
+                <h3 className="feature-item-title">{title}</h3>
+                <p>
+                    {content}
+                </p>
+            </div>
+    )
+}
+
+export default Feature;

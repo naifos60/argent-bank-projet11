@@ -1,0 +1,29 @@
+@import"./components/Header/style/header.scss";
+@import"./components/Footer/style/footer.scss";
+@import"./components/Hero/style/hero.scss";
+@import"./components/Feature/style/feature.scss";
+@import"./Pages/Home/style/home.scss";
+@import"./Pages/Error/style/error.scss";
+
+html {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+  
+  body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .main {
+    flex: 1;
+  }
+  
+  .bg-dark {
+    background-color: #12002b;
+  }
