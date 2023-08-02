@@ -4,6 +4,10 @@
 @import"./components/Feature/style/feature.scss";
 @import"./Pages/Home/style/home.scss";
 @import"./Pages/Error/style/error.scss";
+@import"./Pages/SignIn/style/signIn.scss";
+@import"./components/Form/style/form.scss";
+@import"./Pages/User/style/user.scss";
+@import"./components/Account/style/account.scss";
 
 html {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -21,6 +25,7 @@ html {
   }
   
   .main {
+    display: flex;
     flex: 1;
   }
   
