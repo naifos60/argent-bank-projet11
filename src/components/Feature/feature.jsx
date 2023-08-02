@@ -1,3 +1,5 @@
+import PropTypes  from "prop-types";
+
 function Feature({children, title, content}){
     return(
             <div className="feature-item">
@@ -8,6 +10,11 @@ function Feature({children, title, content}){
                 </p>
             </div>
     )
+}
+
+Feature.propsTypes = {
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
 }
 
 export default Feature;
