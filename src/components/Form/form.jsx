@@ -1,4 +1,9 @@
+import { useNavigate} from "react-router-dom"
+
+
 function Form(){
+  const redirect = () => (navigate("/user"));
+  const navigate = useNavigate();
     return(
         <form>
           <div className="input-wrapper">
@@ -13,7 +18,7 @@ function Form(){
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <button className="sign-in-button">Sign In</button>
+          <button className="sign-in-button" onClick={redirect}>Sign In</button>
         </form>
     )
 }
