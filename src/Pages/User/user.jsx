@@ -4,8 +4,18 @@ import Account from "../../components/Account/account";
 import styles from './style/user.module.css';
 import indexStyles from '../../index.module.css';
 import headerStyles from '../../components/Header/style/header.module.css';
+import { useEffect } from 'react';
+import { useNavigate} from "react-router-dom";
 
 function User(){
+  const token = sessionStorage.getItem('token');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(token === null){
+      navigate('/signIn');
+    }
+  })
     return(
       <div className={styles.user}>
          <Header />
