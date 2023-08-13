@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 
 async function logUser(infoUser) {
-    const navigate = useNavigate;
-    const redirect = () => (navigate("/signIn"));
+    // const navigate = useNavigate;
+    // const redirect = () => (navigate("/signIn"));
     const request = await fetch('http://localhost:3001/api/v1/user/login',{
         method : "POST",
         headers: {
@@ -11,12 +11,12 @@ async function logUser(infoUser) {
         },
         body: infoUser
     })
-    if(!request.ok){
-        throw new Error("erreur API");
-    }
-    else if(request.status === "401" || request.status === "403"){
-        redirect();
-    }
+    // if(!request.ok){
+    //     throw new Error("erreur API");
+    // }
+    // else if(request.status === "401" || request.status === "403"){
+    //     redirect();
+    // }
     const result = await request.json();
     return result
 };

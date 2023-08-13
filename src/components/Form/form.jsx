@@ -6,16 +6,12 @@ import { setProfil } from '../../reducers/profilSlice';
 import { logUser } from "../../services";
 
 
-
-
-
-
 function Form(){
-  const redirect = () => (navigate("/"));
   const navigate = useNavigate();
   const [email, setEmail ] = useState('');
   const [password, setPassword] = useState('');
   const [checked, setChecked] = useState(false);
+  const [userLog, setUserLog] = useState(false);
   const dispatch = useDispatch();
 
 
@@ -29,16 +25,24 @@ function Form(){
     };
     const identify = JSON.stringify(infoUser);
   await logUser(identify).then(data => {
-      const generateToken = data.body.token;
-      if(checked === false){
+      const generateToken = data.body?.token;
+      if(data.status === 400){
+        setUserLog(true);
+        
+      }
+      else if(data.status === "401" || data.status === "403"){
+        navigate('/signIn');
+    }
+      else if(checked === false){
       sessionStorage.setItem('token', generateToken);
+      navigate('/');
       }
       else if (checked === true){
         localStorage.setItem('token', generateToken);
+        navigate('/');
       }
       
       dispatch(setProfil({email, password}));
-      redirect();
   })
 }
     return(
@@ -50,6 +54,9 @@ function Form(){
           <div className={styles.inputWrapper}>
             <label htmlFor="password">Password</label>
             <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <div className={userLog ? styles.errorTrue : styles.errorWrapper}>
+          <p className={styles.errorMessage}>* Erreur dans l’identifiant ou le mot de passe</p>
           </div>
           <div className={styles.inputRemember}>
             <input type="checkbox" id="remember-me" onChange={() => setChecked(!checked)}/>
