@@ -1,7 +1,9 @@
+import styles from './style/footer.module.css';
+
 function Footer(){
     return(
-    <footer className="footer">
-      <p className="footer-text">Copyright 2020 Argent Bank</p>
+    <footer className={styles.footer}>
+      <p className={styles.footerText}>Copyright 2020 Argent Bank</p>
     </footer>
     )
 }

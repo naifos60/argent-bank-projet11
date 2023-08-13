@@ -1,5 +1,4 @@
-.sign-in{
-    &-button {
+.signInButton {
         font-family: Avenir, Helvetica, Arial, sans-serif;
         display: block;
         width: 100%;
@@ -12,28 +11,30 @@
         border: none;
         text-decoration: underline;
     }
-} 
 
-.input-remember {
+.inputRemember {
     display: flex;
-    & label {
+    }
+
+.inputRemember label {
         margin-left: 0.25rem;
     }
-}
   
-.input-wrapper {
+.inputWrapper {
     display: flex;
     flex-direction: column;
     text-align: left;
-    margin-bottom: 1rem;
-    & label {
+    margin-bottom: 1rem;   
+    }
+    
+.inputWrapper label {
         font-weight: bold;
     }
-    & input {
+
+    .inputWrapper input {
         padding: 5px;
         font-size: 1.2rem;
     }
-}
   
   
   

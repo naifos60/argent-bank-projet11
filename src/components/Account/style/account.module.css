@@ -11,37 +11,41 @@
     box-sizing: border-box;
     text-align: left;
     margin-bottom: 2rem;
-    &-amount {
+    }
+
+    .accountAmountDescription {
+            margin: 0;
+    }
+
+    .accountAmount {
         margin: 0;
         font-size: 2.5rem;
-        font-weight: bold;
-        &-description {
-            margin: 0;
-        }
+        font-weight: bold;    
     }
-    &-title {
+
+    .accountTitle {
         margin: 0;
         padding: 0;
         font-size: 1rem;
         font-weight: normal;
     }
-    &-content-wrapper {
+    
+    .accountContentWrapper {
         width: 100%;
         flex: 1;
     }
-}
+
 
   
   
   @media (min-width: 720px) {
     .account {
-      flex-direction: row;
-      &-content-wrapper.cta {
-          flex: 0;
-        }
+      flex-direction: row; 
     }
-
-    .transaction-button {
+    .accountContentWrapperCta {
+          flex: 0;
+    }
+    .transactionButton {
       width: 200px;
     }
   }

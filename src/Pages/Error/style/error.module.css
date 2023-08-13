@@ -1,5 +1,4 @@
-.error{
-    &_msg{
+.errorMsg{
         font-size: 36px;
         font-weight: 500;
         line-height: 51.34px;
@@ -7,7 +6,8 @@
         margin-top: 139px;
         color:  #00bc77;
     }
-    &_title{
+
+.errorTitle{
         color: #00bc77;
         font-size: 200px;
         margin-top: 50px;
@@ -15,11 +15,12 @@
         height: 160px;
         width: auto;
     }
-    & footer{
+    
+.error footer{
         margin-top: 139px;
     }
-}
-.return_link{
+
+.returnLink{
     color: #00bc77;
     font-size: 18px;
     font-weight: 500;
@@ -29,22 +30,23 @@
 }
 
 @media (max-width: 768px){
-.error{
-    &_msg{
+.errorMsg{
         font-size: 18px;
         line-height: 25.67px;
         margin-top: 45px;
         margin-bottom: 45px;
         text-align: center;
         }
-    &_title{
-            font-size: 150px;
-        }
-    & footer{
+
+.errorTitle{
+        font-size: 150px;
+     }
+
+.error footer{
         margin-top: 113px;
     }
-    }
-.return_link{
+
+.returnLink{
         font-size: 14px;
     }
 }

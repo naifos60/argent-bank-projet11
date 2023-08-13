@@ -1,10 +1,11 @@
 import PropTypes  from "prop-types";
+import styles from './style/feature.module.css';
 
 function Feature({children, title, content}){
     return(
-            <div className="feature-item">
+            <div className={styles.featureItem}>
                 {children}
-                <h3 className="feature-item-title">{title}</h3>
+                <h3 className={styles.featureItemTitle}>{title}</h3>
                 <p>
                     {content}
                 </p>
