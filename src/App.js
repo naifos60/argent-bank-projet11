@@ -4,16 +4,17 @@ import SignIn from './Pages/SignIn/signIn.jsx';
 import Error from './Pages/Error/error.jsx';
 import User from './Pages/User/user.jsx';
 
+
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/signIn' element={<SignIn />} />
-        <Route path='/user' element={<User />} />
-        <Route path='*' element={<Error />} />
-      </Routes>
-    </Router>
+        <Router>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/signIn' element={<SignIn />} />
+            <Route path='/user' element={<User />} />
+            <Route path='*' element={<Error />} />
+          </Routes>
+        </Router>
   );
 }
 

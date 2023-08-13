@@ -1,15 +1,17 @@
 import PropTypes  from "prop-types";
+import styles from './style/account.module.css';
+import userStyles from '../../Pages/User/style/user.module.css';
 
 function Account({title, amount, description}){
     return(
-        <section className="account">
-        <div className="account-content-wrapper">
-          <h3 className="account-title">{title}</h3>
-          <p className="account-amount">{amount}</p>
-          <p className="account-amount-description">{description}</p>
+        <section className={styles.account}>
+        <div className={styles.accountContentWrapper}>
+          <h3 className={styles.accountTitle}>{title}</h3>
+          <p className={styles.accountAmount}>{amount}</p>
+          <p className={styles.accountAmountDescription}>{description}</p>
         </div>
-        <div className="account-content-wrapper cta">
-          <button className="transaction-button">View transactions</button>
+        <div className={styles.accountContentWrapperCta}>
+          <button className={userStyles.transactionButton}>View transactions</button>
         </div>
       </section>
     )

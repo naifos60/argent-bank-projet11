@@ -1,20 +1,21 @@
 import logo from "../../asset/img/argentBankLogo.png";
+import styles from './style/header.module.css';
 
 
 function Header(){
     return(
-    <header className="header">
-        <nav className="header_main-nav">
-      <a className="header_main-nav-logo" href="./">
+    <header className={styles.header}>
+        <nav className={styles.headerMainNav}>
+        <a className={styles.headerMainNavItemLogo} href="./"> 
         <img
-          className="header_main-nav-logo-image"
+          className={styles.headerMainNavItemLogoImage}
           src={logo}
           alt="Argent Bank Logo"
         />
-        <h1 className="sr-only">Argent Bank</h1>
+        <h1 className={styles.srOnly}>Argent Bank</h1>
       </a>
       <div>
-        <a className="header_main-nav-item" href="./signIn">
+        <a className={styles.hearderMainNavItem} href="./signIn">
           <i className="fa fa-user-circle"></i>
           Sign In
         </a>
