@@ -6,6 +6,7 @@ import indexStyles from '../../index.module.css';
 import headerStyles from '../../components/Header/style/header.module.css';
 import { useEffect } from 'react';
 import { useNavigate} from "react-router-dom";
+import EditForm from "../../components/EditForm/editForm";
 
 function User(){
   const token = sessionStorage.getItem('token');
@@ -24,6 +25,7 @@ function User(){
                 <h1>Welcome back<br />Tony Jarvis!</h1>
                 <button className={styles.editButton}>Edit Name</button>
             </div>
+            <EditForm />
             <h2 className={headerStyles.srOnly}>Accounts</h2>
             <Account title="Argent Bank Checking (x8349)" amount="$2,082.79" description="Available Balance" />
             <Account title="Argent Bank Savings (x6712)" amount="$10,928.42" description="Available Balance" />

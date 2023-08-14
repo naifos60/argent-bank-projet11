@@ -35,11 +35,11 @@ function Form(){
     }
       else if(checked === false){
       sessionStorage.setItem('token', generateToken);
-      navigate('/');
+      navigate('/user');
       }
       else if (checked === true){
         localStorage.setItem('token', generateToken);
-        navigate('/');
+        navigate('/user');
       }
       
       dispatch(setProfil({email, password}));
