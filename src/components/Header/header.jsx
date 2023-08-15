@@ -12,19 +12,10 @@ function Header(){
   const navigate = useNavigate();
   const dispatch= useDispatch();
   const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [password, setPassword] = useState('');
   const token = sessionStorage.getItem('token');
 
   const resetState = () => {
-    setEmail("");
-    setFirstName("");
-    setLastName("");
-    setPassword("");
-    setUserName("");
-    dispatch(setProfil({email, password, firstName, lastName, userName}));
+    dispatch(setProfil());
   }
   async function getDatas(){
     await getUserInfo().then(data => {
@@ -36,8 +27,8 @@ function Header(){
 
   useEffect(() => {
     if(token !== null){
-     getDatas();
-    }
+    getDatas();
+    } 
   })
   // const localToken = localStorage.getItem('token');
   const sessionToken = sessionStorage.getItem('token');
@@ -82,7 +73,7 @@ function Header(){
                   </a>
                   <a className={styles.headerMainNavItem} href="./" onClick={(e) => {
                     e.preventDefault();
-                    sessionStorage.clear('token');
+                    sessionStorage.clear();
                     resetState();
                     redirect();
                     }}>
