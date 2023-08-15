@@ -27,6 +27,7 @@
     color: #fff;
   }
 
+
   @media (min-width: 720px) {
     .transactionButton {
       width: 200px;
