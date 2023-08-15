@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
 async function logUser(infoUser) {
-    const navigate = useNavigate;
-    const redirect = () => (navigate("/user"));
     const request = await fetch('http://localhost:3001/api/v1/user/login',{
         method : "POST",
         headers: {
@@ -12,8 +10,7 @@ async function logUser(infoUser) {
         body: infoUser
     })
     const result = await request.json();
-    redirect();
-    return result
+    return result;
 }
 
 async function changeUserName(userName){

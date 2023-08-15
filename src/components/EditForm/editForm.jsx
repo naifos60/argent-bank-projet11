@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from './style/editForm.module.css';
 import { changeUserName } from "../../services";
 
-function EditForm(){
+function EditForm({firstName, lastName}){
     const [userName, setUserName] = useState('');
 
     return(
@@ -15,15 +15,15 @@ function EditForm(){
         </div>
         <div className={styles.editInputWrapper}>
             <label htmlFor="firstName">First name:</label>
-            <input type="text" id="firstName" disabled />
+            <input type="text" id="firstName" placeholder={firstName} disabled />
         </div>
         <div className={styles.editInputWrapper}>
             <label htmlFor="lastName">Last name:</label>
-            <input type="text" id="lastName" disabled/>
+            <input type="text" id="lastName" placeholder={lastName} disabled/>
         </div>
         <div className={styles.editButtonWrapper}>
-            <button className={styles.editButton} onClick={changeUserName(userName)}>Save</button>
-            <button className={styles.editButton} onClick={""}>Cancel</button>
+            <button className={styles.editButton} onClick={(e) => {e.preventDefault(); changeUserName(userName); window.location.reload('/user')}}>Save</button>
+            <button className={styles.editButton} onClick={(e) =>{e.preventDefault(); window.location.reload('/user')}}>Cancel</button>
         </div>
             </form>
         </div>

@@ -44,12 +44,12 @@ function User(){
 
     return(
       <div className={styles.user}>
-         <Header userName={`${userName}`}/>
+         <Header />
          <main className={indexStyles.bgDark}>
           {!edit ?
             <div className={styles.headerUser}>
                 <h1>Welcome back<br />{`${firstName} ${lastName}`} !</h1>
-                <button className={styles.editButton} onClick={(e) => {e.preventDefault(); setEdit(!edit)}}>Edit Name</button>
+                <button className={styles.editButton} onClick={e => {e.preventDefault(); setEdit(!edit)}}>Edit Name</button>
             </div> :
             <EditForm firstName={firstName} lastName={lastName}/>}
             <h2 className={headerStyles.srOnly}>Accounts</h2>

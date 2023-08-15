@@ -12,6 +12,7 @@ function Header(){
   const navigate = useNavigate();
   const dispatch= useDispatch();
   const [userName, setUserName] = useState('');
+  const token = sessionStorage.getItem('token');
   async function getDatas(){
     await getUserInfo().then(data => {
         setUserName(data.body?.userName); 
@@ -21,7 +22,9 @@ function Header(){
   
 
   useEffect(() => {
+    if(token !== null){
      getDatas();
+    }
   })
   // const localToken = localStorage.getItem('token');
   const sessionToken = sessionStorage.getItem('token');
@@ -38,7 +41,7 @@ function Header(){
         <h1 className={styles.srOnly}>Argent Bank</h1>
       </a>
       <div>
-        <a className={styles.hearderMainNavItem} href="./signIn">
+        <a className={styles.headerMainNavItem} href="./signIn">
           <i className="fa fa-user-circle"></i>
           Sign In
         </a>
