@@ -12,12 +12,25 @@ function Header(){
   const navigate = useNavigate();
   const dispatch= useDispatch();
   const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [password, setPassword] = useState('');
   const token = sessionStorage.getItem('token');
+
+  const resetState = () => {
+    setEmail("");
+    setFirstName("");
+    setLastName("");
+    setPassword("");
+    setUserName("");
+    dispatch(setProfil({email, password, firstName, lastName, userName}));
+  }
   async function getDatas(){
     await getUserInfo().then(data => {
         setUserName(data.body?.userName); 
       },
-      dispatch(setProfil({ userName}))
+      dispatch(setProfil({userName}))
     )};
   
 
@@ -70,6 +83,7 @@ function Header(){
                   <a className={styles.headerMainNavItem} href="./" onClick={(e) => {
                     e.preventDefault();
                     sessionStorage.clear('token');
+                    resetState();
                     redirect();
                     }}>
                   <i className="fa fa-sign-out"></i>

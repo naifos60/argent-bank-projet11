@@ -5,7 +5,7 @@ const initialState = {
    password: "",
    firstName: "",
    lastName: "",
-   userName: ""
+   userName: "",
 }
 
 const profilSlice = createSlice({

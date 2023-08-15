@@ -48,7 +48,7 @@ function User(){
          <main className={indexStyles.bgDark}>
           {!edit ?
             <div className={styles.headerUser}>
-                <h1>Welcome back<br />{`${firstName} ${lastName}`} !</h1>
+              {userName === "" ? <h1>Welcome back<br />{`${firstName} ${lastName}`} !</h1> : <h1>Welcome back<br />{`${userName}`} !</h1> }
                 <button className={styles.editButton} onClick={e => {e.preventDefault(); setEdit(!edit)}}>Edit Name</button>
             </div> :
             <EditForm firstName={firstName} lastName={lastName}/>}
