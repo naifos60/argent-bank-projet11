@@ -8,13 +8,15 @@ import securityIcon from "../../asset/img/icon-security.png";
 import styles from './style/home.module.css';
 import featureStyles from '../../components/Feature/style/feature.module.css';
 import headerStyles from '../../components/Header/style/header.module.css';
-
+import { useSelector} from 'react-redux';
 
 
 function Home() {
+  const userName = useSelector((...state) => state.userName);
+
     return (
       <div className={styles.home}>
-         <Header />
+         <Header userName={`${userName}`}/>
          <Hero />
         <section className={styles.features}>
             <h2 className={headerStyles.srOnly}>Features</h2>
