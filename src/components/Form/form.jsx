@@ -33,6 +33,7 @@ function Form(){
       else if(data.status === "401" || data.status === "403"){
         navigate('/signIn');
     }
+      } 
       else if(checked === false){
       sessionStorage.setItem('token', generateToken);
       navigate('/user');
