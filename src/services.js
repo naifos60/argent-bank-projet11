@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom"
+import compareStorage from './middleware/middleware'
+
 
 async function logUser(infoUser) {
     const request = await fetch('http://localhost:3001/api/v1/user/login',{
@@ -14,7 +16,7 @@ async function logUser(infoUser) {
 }
 
 async function changeUserName(userName){
-    const token = sessionStorage.getItem('token');
+    const token = compareStorage();
     const modifUserName = {
         userName: userName
     }
@@ -34,7 +36,7 @@ async function changeUserName(userName){
 };
 
 async function getUserInfo(){
-    const token = sessionStorage.getItem('token');
+    const token = compareStorage();
     const navigate = useNavigate;
     const request = await fetch('http://localhost:3001/api/v1/user/profile',{
         method : "POST",

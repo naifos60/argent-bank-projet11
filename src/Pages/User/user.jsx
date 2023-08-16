@@ -21,6 +21,7 @@ function User(){
   const [userName, setUserName] = useState('');
   const [edit, setEdit] = useState(false);
   const token = sessionStorage.getItem('token');
+  const locToken = localStorage.getItem('token');
   const navigate = useNavigate();
   
    async function getDatas(){
@@ -35,7 +36,7 @@ function User(){
   
 
   useEffect(() => {
-    if(token === null){
+    if(token === null && locToken === null){
       navigate('/signIn');
     }
      getDatas(); 

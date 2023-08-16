@@ -12,12 +12,8 @@ const profilSlice = createSlice({
     name: 'profil',
     initialState,
     reducers: {
-        setProfil: (state, action) => {
-            state.email = action.payload
-            state.password = action.payload
-            state.firstName = action.payload
-            state.lastName = action.payload
-            state.userName = action.payload
+        setProfil: (state, {payload}) => {
+            state.profil = payload
         }
     }
 })

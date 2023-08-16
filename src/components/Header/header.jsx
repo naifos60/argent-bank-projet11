@@ -5,6 +5,7 @@ import { setProfil } from "../../reducers/profilSlice";
 import { useEffect, useState } from 'react';
 import logo from "../../asset/img/argentBankLogo.png";
 import styles from './style/header.module.css';
+import compareStorage from "../../middleware/middleware";
 
 
 function Header(){
@@ -12,7 +13,7 @@ function Header(){
   const navigate = useNavigate();
   const dispatch= useDispatch();
   const [userName, setUserName] = useState('');
-  const token = sessionStorage.getItem('token');
+  const token = compareStorage();
 
   const resetState = () => {
     dispatch(setProfil());
@@ -30,9 +31,8 @@ function Header(){
     getDatas();
     } 
   })
-  // const localToken = localStorage.getItem('token');
-  const sessionToken = sessionStorage.getItem('token');
-  if (sessionToken === null ){
+
+  if (token === null ){
     return(
     <header className={styles.header}>
         <nav className={styles.headerMainNav}>
@@ -74,6 +74,7 @@ function Header(){
                   <a className={styles.headerMainNavItem} href="./" onClick={(e) => {
                     e.preventDefault();
                     sessionStorage.clear();
+                    localStorage.clear();
                     resetState();
                     redirect();
                     }}>
