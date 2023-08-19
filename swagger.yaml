@@ -179,10 +179,6 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-
-
-         
-   
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -242,9 +238,9 @@ definitions:
     type: object
     properties:
       accountID:
-        type: string
+        type: integer
       transactionId:
-        type: string
+        type: integer
       category:
         type: string
       note:
