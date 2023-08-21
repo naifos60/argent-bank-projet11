@@ -53,4 +53,3 @@ async function getUserInfo(){
 };
 
 export {logUser, changeUserName, getUserInfo}
-
