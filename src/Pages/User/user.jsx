@@ -24,6 +24,9 @@ function User(){
   const locToken = localStorage.getItem('token');
   const navigate = useNavigate();
   
+
+
+  
    async function getDatas(){
     await getUserInfo().then(data => {
         setEmail(data.body?.email);

@@ -1,20 +1,21 @@
 import { useState } from "react";
 import { useNavigate} from "react-router-dom"
 import styles from './style/form.module.css';
-import { useDispatch } from 'react-redux';
-import { setProfil } from '../../reducers/profilSlice';
+import { useDispatch, useSelector} from 'react-redux';
+import { setProfil, setError } from '../../reducers/profilSlice';
 import { logUser } from "../../services";
+import { selectError } from "../../utils/selector";
 
 
 function Form(){
   const navigate = useNavigate();
+  const error = useSelector(selectError);
+  const dispatch = useDispatch();
   const [email, setEmail ] = useState('');
   const [password, setPassword] = useState('');
   const [checked, setChecked] = useState(false);
-  const [userLog, setUserLog] = useState(false);
-  const dispatch = useDispatch();
-
-
+  
+ 
   async function logIn(e){
     e.preventDefault();
     const emailUser = email;
@@ -26,9 +27,8 @@ function Form(){
     const identify = JSON.stringify(infoUser);
   await logUser(identify).then(data => {
       const generateToken = data.body?.token;
-      if(data.status === 400){
-        setUserLog(true);
-        
+      if(data.status !== 200){
+        dispatch(setError(true))
       }
       else if(data.status === "401" || data.status === "403"){
         navigate('/signIn');
@@ -36,13 +36,16 @@ function Form(){
       else if(checked === false){
       sessionStorage.setItem('token', generateToken);
       navigate('/user');
+      dispatch(setError(false))
       }
       else if (checked === true){
         localStorage.setItem('token', generateToken);
         navigate('/user');
+        dispatch(setError(false));
       }
       
       dispatch(setProfil({email, password}));
+      
   })
 }
     return(
@@ -55,7 +58,7 @@ function Form(){
             <label htmlFor="password">Password</label>
             <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
           </div>
-          <div className={userLog ? styles.errorTrue : styles.errorWrapper}>
+          <div className={error ? styles.errorTrue : styles.errorWrapper}>
           <p className={styles.errorMessage}>* Erreur dans l’identifiant ou le mot de passe</p>
           </div>
           <div className={styles.inputRemember}>

@@ -1,4 +1,4 @@
- function compareStorage(){
+  function compareStorage() {
     const token = sessionStorage.getItem('token');
     const locToken = localStorage.getItem('token');
     if(token !== null){
@@ -6,6 +6,8 @@
     }else{
         return locToken;
     }
-}
+};
 
-export default compareStorage
+
+    
+   export default compareStorage;
