@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { changeUserName } from "../../services";
-import { useDispatch } from 'react-redux'
 import styles from './style/editForm.module.css';
-import  { setProfil } from "../../reducers/profilSlice";
-
+import { changeUserName } from "../../services";
+import PropTypes  from "prop-types";
 
 function EditForm({firstName, lastName}){
     const [userName, setUserName] = useState('');
-    const dispatch = useDispatch();
 
     return(
         <div className={styles.editFormWrapper}>
@@ -19,24 +16,24 @@ function EditForm({firstName, lastName}){
         </div>
         <div className={styles.editInputWrapper}>
             <label htmlFor="firstName">First name:</label>
-            <input type="text" id="firstName" placeholder={`${firstName}`} disabled />
+            <input type="text" id="firstName" placeholder={firstName} disabled />
         </div>
         <div className={styles.editInputWrapper}>
             <label htmlFor="lastName">Last name:</label>
-            <input type="text" id="lastName" placeholder={`${lastName}`} disabled/>
+            <input type="text" id="lastName" placeholder={lastName} disabled/>
         </div>
         <div className={styles.editButtonWrapper}>
-            <button className={styles.editButton} onClick={(e) => {
-                e.preventDefault();
-                changeUserName(userName);
-                dispatch(setProfil({userName}));
-                window.location.reload('/user');
-                }}>Save</button>
-            <button className={styles.editButton}>Cancel</button>
+            <button className={styles.editButton} onClick={(e) => {e.preventDefault(); changeUserName(userName); window.location.reload('/user')}}>Save</button>
+            <button className={styles.editButton} onClick={(e) =>{e.preventDefault(); window.location.reload('/user')}}>Cancel</button>
         </div>
             </form>
         </div>
     )
 }
+
+EditForm.propsTypes = {
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+  }
 
 export default EditForm;
