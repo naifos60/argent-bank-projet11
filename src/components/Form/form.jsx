@@ -31,7 +31,7 @@ function Form(){
         dispatch(setError(true))
       }
       else if(data.status === "401" || data.status === "403"){
-        navigate('/signIn');
+        navigate('/logIn');
       } 
       else if(checked === false){
       sessionStorage.setItem('token', generateToken);
