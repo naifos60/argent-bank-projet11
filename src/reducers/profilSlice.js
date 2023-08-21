@@ -1,12 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-   email: "",
-   password: "",
-   firstName: "",
-   lastName: "",
-   userName: "",
-   log: false
+   user: null,
+   error: false,
+   isLoading: false,
 }
 
 const profilSlice = createSlice({
@@ -14,14 +11,16 @@ const profilSlice = createSlice({
     initialState,
     reducers: {
         setProfil: (state, {payload}) => {
-            state.email = payload
-            state.password = payload
-            state.firstName = payload
-            state.lastName = payload
-            state.userName = payload
+            state.user = payload
+        },
+        setError: (state, {payload}) => {
+            state.error = payload
+        },
+        setIsLoading: (state, {payload}) => {
+            state.isLoading = payload
         }
     }
 })
 
-export const {setProfil} = profilSlice.actions;
+export const {setProfil, setError, setIsLoading} = profilSlice.actions;
 export default profilSlice.reducer;
