@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from './style/editForm.module.css';
 import { changeUserName } from "../../services";
+import PropTypes  from "prop-types";
 
 function EditForm({firstName, lastName}){
     const [userName, setUserName] = useState('');
@@ -29,5 +30,10 @@ function EditForm({firstName, lastName}){
         </div>
     )
 }
+
+EditForm.propsTypes = {
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+  }
 
 export default EditForm;
