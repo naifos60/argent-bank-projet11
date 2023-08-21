@@ -1,38 +1,38 @@
-<<<<<<< Updated upstream
-=======
 import { useNavigate } from "react-router-dom";
 import { getUserInfo } from "../../services";
 import { useDispatch } from 'react-redux';
 import { setProfil } from "../../reducers/profilSlice";
 import { useEffect, useState } from 'react';
->>>>>>> Stashed changes
 import logo from "../../asset/img/argentBankLogo.png";
 import styles from './style/header.module.css';
+import compareStorage from "../../middleware/middleware";
 
 
 function Header(){
-<<<<<<< Updated upstream
-=======
   const redirect = () => (navigate("/"));
   const navigate = useNavigate();
   const dispatch= useDispatch();
   const [userName, setUserName] = useState('');
+  const token = compareStorage();
+
+  const resetState = () => {
+    dispatch(setProfil());
+  }
   async function getDatas(){
     await getUserInfo().then(data => {
         setUserName(data.body?.userName); 
       },
-      dispatch(setProfil({ userName}))
+      dispatch(setProfil({userName}))
     )};
   
 
   useEffect(() => {
-     getDatas();
+    if(token !== null){
+    getDatas();
+    } 
   })
-  
-  // const localToken = localStorage.getItem('token');
-  const sessionToken = sessionStorage.getItem('token');
-  if (sessionToken === null ){
->>>>>>> Stashed changes
+
+  if (token === null ){
     return(
     <header className={styles.header}>
         <nav className={styles.headerMainNav}>
@@ -45,7 +45,7 @@ function Header(){
         <h1 className={styles.srOnly}>Argent Bank</h1>
       </a>
       <div>
-        <a className={styles.hearderMainNavItem} href="./signIn">
+        <a className={styles.headerMainNavItem} href="./logIn">
           <i className="fa fa-user-circle"></i>
           Sign In
         </a>
@@ -53,8 +53,7 @@ function Header(){
     </nav>
     </header>
     )
-<<<<<<< Updated upstream
-=======
+
       }else {
         return (
             <header className={styles.header}>
@@ -74,7 +73,9 @@ function Header(){
                   </a>
                   <a className={styles.headerMainNavItem} href="./" onClick={(e) => {
                     e.preventDefault();
-                    sessionStorage.clear('token');
+                    sessionStorage.clear();
+                    localStorage.clear();
+                    resetState();
                     redirect();
                     }}>
                   <i className="fa fa-sign-out"></i>
@@ -85,12 +86,6 @@ function Header(){
             </header>
     )
   }
-          
-        
-
-        
-    
->>>>>>> Stashed changes
 }
 
 export default Header;
