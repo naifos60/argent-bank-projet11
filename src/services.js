@@ -1,12 +1,8 @@
-<<<<<<< Updated upstream
 import { useNavigate } from "react-router-dom"
-=======
-import { useNavigate} from "react-router-dom"
->>>>>>> Stashed changes
+import compareStorage from './middleware/middleware'
+
 
 async function logUser(infoUser) {
-    const navigate = useNavigate;
-    const redirect = () => (navigate("/user"));
     const request = await fetch('http://localhost:3001/api/v1/user/login',{
         method : "POST",
         headers: {
@@ -15,14 +11,15 @@ async function logUser(infoUser) {
         },
         body: infoUser
     })
-    if(!request.ok){
-        throw new Error("erreur API");
+    const result = await request.json();
+    return result;
+}
+
+async function changeUserName(userName){
+    const token = compareStorage();
+    const modifUserName = {
+        userName: userName
     }
-    else if(request.status === "401" || request.status === "403"){
-        redirect();
-    }
-<<<<<<< Updated upstream
-=======
     const identifyUserName = JSON.stringify(modifUserName);
     const request = await fetch('http://localhost:3001/api/v1/user/profile',{
         method : "PUT",
@@ -33,16 +30,13 @@ async function logUser(infoUser) {
         },
         body: identifyUserName
     })
->>>>>>> Stashed changes
+
     const result = await request.json();
     return result
 };
 
-<<<<<<< Updated upstream
-export {logUser}
-=======
 async function getUserInfo(){
-    const token = sessionStorage.getItem('token');
+    const token = compareStorage();
     const navigate = useNavigate;
     const request = await fetch('http://localhost:3001/api/v1/user/profile',{
         method : "POST",
@@ -59,4 +53,3 @@ async function getUserInfo(){
 };
 
 export {logUser, changeUserName, getUserInfo}
->>>>>>> Stashed changes
