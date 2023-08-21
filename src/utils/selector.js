@@ -1,2 +1,3 @@
-export const selectLogin = (state) => state.login
-export const selectProfil = (state) => state.profil
+export const selectProfil = (state) => state.profil.user
+
+export const selectError = ( state) => state.profil.error
