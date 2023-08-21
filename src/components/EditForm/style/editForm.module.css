@@ -14,8 +14,6 @@
     align-items: center;
 }
 
-.editFormTitle{}
-
 .editInputWrapper{
     display: flex;
     flex-direction: row;
