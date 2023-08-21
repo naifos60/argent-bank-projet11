@@ -35,28 +35,27 @@ function Form(){
       } 
       else if(checked === false){
       sessionStorage.setItem('token', generateToken);
-      navigate('/user');
+      navigate('/profil');
       dispatch(setError(false))
       }
       else if (checked === true){
         localStorage.setItem('token', generateToken);
-        navigate('/user');
+        navigate('/profil');
         dispatch(setError(false));
       }
       
-      dispatch(setProfil({email, password}));
-      
+      dispatch(setProfil({email, password}));     
   })
 }
     return(
         <form>
           <div className={styles.inputWrapper}>
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" onChange={(e) => setEmail(e.target.value)}/>
+            <input type="text" id="username" onChange={(e) => setEmail(e.target.value)} required/>
           </div>
           <div className={styles.inputWrapper}>
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} required/>
           </div>
           <div className={error ? styles.errorTrue : styles.errorWrapper}>
           <p className={styles.errorMessage}>* Erreur dans l’identifiant ou le mot de passe</p>

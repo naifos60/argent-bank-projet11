@@ -45,7 +45,7 @@ function Header(){
         <h1 className={styles.srOnly}>Argent Bank</h1>
       </a>
       <div>
-        <a className={styles.headerMainNavItem} href="./signIn">
+        <a className={styles.headerMainNavItem} href="./logIn">
           <i className="fa fa-user-circle"></i>
           Sign In
         </a>

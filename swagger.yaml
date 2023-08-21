@@ -102,7 +102,7 @@ paths:
         '500':
           description: Internal Server Error
   /transactions/:accountId:
-    get:
+   get:
       security:
         - Bearer: []
       tags:
@@ -110,69 +110,17 @@ paths:
       summary: transaction API
       description: API for fetching transactions
       parameters:
-        - in: body
-          name: body
+        - in: path
+          name: accountId
           description: unique ID of account 
           required: true
           schema:
-           $ref: '#/definitions/transactions/:accountID'
+           type: string
       produce:
         - application/json
       response:
         '200':
           description: transactions for account:acountID retrieved successuly
-          schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - Transaction Module
-      summary: transaction API
-      description: API for create note in transaction:transactionId
-      parameters:
-        - in: body
-          name: body
-          description: create note for transaction:transactionID in account:accountId
-          required: true
-          schema:
-           $ref: '#/definitions/transactions/:accountID'
-      produce:
-        - application/json
-      response:
-        '200':
-          description: Note add successuly
-          schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-    put:
-      security:
-        - Bearer: []
-      tags:
-        - Transaction module
-      summary: transaction API
-      description: update category for transction
-      summary: transaction API
-      description: API for update category in transaction:transactionId for account:accountID
-      parameters:
-        - in: body
-          name: body
-          description: create note for transaction:transactionID in account:accountId
-          required: true
-          schema:
-           $ref: '#/definitions/transactions/:accountID'
-      produce:
-        - application/json
-      response:
-        '200':
-          description: Note add successuly
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':

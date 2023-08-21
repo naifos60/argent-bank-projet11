@@ -1,6 +1,4 @@
 import Feature from "../../components/Feature/feature";
-import Footer from "../../components/Footer/footer";
-import Header from "../../components/Header/header";
 import Hero from "../../components/Hero/hero";
 import chatIcon from "../../asset/img/icon-chat.png";
 import moneyIcon from "../../asset/img/icon-money.png";
@@ -14,7 +12,6 @@ import headerStyles from '../../components/Header/style/header.module.css';
 function Home() {
     return (
       <div className={styles.home}>
-         <Header />
          <Hero />
         <section className={styles.features}>
             <h2 className={headerStyles.srOnly}>Features</h2>
@@ -28,7 +25,6 @@ function Home() {
               {<img src={securityIcon} alt="Security Icon" className={featureStyles.featureIcon} />}
             </Feature>
         </section>
-         <Footer />
       </div>
       ) 
     }

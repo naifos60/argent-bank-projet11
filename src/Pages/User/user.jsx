@@ -1,5 +1,3 @@
-import Header from "../../components/Header/header";
-import Footer from "../../components/Footer/footer";
 import Account from "../../components/Account/account";
 import EditForm from "../../components/EditForm/editForm";
 import styles from './style/user.module.css';
@@ -40,7 +38,7 @@ function User(){
 
   useEffect(() => {
     if(token === null && locToken === null){
-      navigate('/signIn');
+      navigate('/logIn');
     }
      getDatas(); 
     
@@ -48,11 +46,10 @@ function User(){
 
     return(
       <div className={styles.user}>
-         <Header />
          <main className={indexStyles.bgDark}>
           {!edit ?
             <div className={styles.headerUser}>
-              {userName === "" ? <h1>Welcome back<br />{`${firstName} ${lastName}`} !</h1> : <h1>Welcome back<br />{`${userName}`} !</h1> }
+               <h1>Welcome back<br />{`${firstName} ${lastName}`} !</h1>
                 <button className={styles.editButton} onClick={e => {e.preventDefault(); setEdit(!edit)}}>Edit Name</button>
             </div> :
             <EditForm firstName={firstName} lastName={lastName}/>}
@@ -61,7 +58,6 @@ function User(){
             <Account title="Argent Bank Savings (x6712)" amount="$10,928.42" description="Available Balance" />
             <Account title="Argent Bank Credit Card (x8349)" amount="$184.30" description="Current Balance" />
          </main>
-         <Footer />
       </div>
       ) 
     }
