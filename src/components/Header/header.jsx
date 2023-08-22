@@ -3,7 +3,7 @@ import { getUserInfo } from "../../services";
 import { useDispatch } from 'react-redux';
 import { setProfil } from "../../reducers/profilSlice";
 import { useEffect, useState } from 'react';
-import logo from "../../asset/img/argentBankLogo.png";
+import logo from "../../asset/img/argentBankLogo.webp";
 import styles from './style/header.module.css';
 import compareStorage from "../../middleware/middleware";
 
