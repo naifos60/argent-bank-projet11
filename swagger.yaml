@@ -101,12 +101,12 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /transactions/:accountId:
-   get:
+  /transactions/{accountId}:
+    get:
       security:
         - Bearer: []
       tags:
-        - Transaction Module
+        - Transactions Module
       summary: transaction API
       description: API for fetching transactions
       parameters:
@@ -114,13 +114,78 @@ paths:
           name: accountId
           description: unique ID of account 
           required: true
-          schema:
-           type: string
-      produce:
-        - application/json
-      response:
+          type: string
+      responses:
         '200':
-          description: transactions for account:acountID retrieved successuly
+          description: Transactions for account retrieved successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /transactions/{accountId}/{transactionId}/category:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: transaction API
+      description: API for update category in transaction
+      parameters:
+        - in: path
+          name: accountId
+          description: unique ID of account 
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: unique ID of transaction 
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: select category of transaction 
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionsCategory'
+      responses:
+        '200':
+          description: Category for transaction update successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error 
+  /transactions/{accountId}/{transactionId}/note:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: transaction API
+      description: API for create note in transaction
+      parameters:
+        - in: path
+          name: accountId
+          description: unique ID of account 
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: unique ID of transaction 
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: a note for transaction 
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionsNote'
+      responses:
+        '200':
+          description: Note at transaction add successully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
@@ -182,14 +247,13 @@ definitions:
     properties:
       userName:
         type: string
-  Transactions:
+  TransactionsCategory:
     type: object
     properties:
-      accountID:
-        type: integer
-      transactionId:
-        type: integer
       category:
         type: string
-      note:
+  TransactionsNote:
+    type: object
+    properties:
+      note: 
         type: string
