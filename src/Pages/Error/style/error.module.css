@@ -1,3 +1,6 @@
+.error{
+    margin-bottom: 85px;
+}
 .errorMsg{
         font-size: 36px;
         font-weight: 500;
@@ -30,6 +33,9 @@
 }
 
 @media (max-width: 768px){
+.error{
+    margin-bottom: 35px;
+}
 .errorMsg{
         font-size: 18px;
         line-height: 25.67px;
