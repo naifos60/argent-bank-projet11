@@ -101,7 +101,7 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /transactions/{accountId}:
+  /accounts/{accountId}/transactions:
     get:
       security:
         - Bearer: []
@@ -119,9 +119,15 @@ paths:
         '200':
           description: Transactions for account retrieved successully
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/accountApiResponse'
         '400':
           description: Invalid Fields
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Account not found
         '500':
           description: Internal Server Error
   /transactions/{accountId}/{transactionId}/category:
@@ -145,27 +151,33 @@ paths:
           type: string
         - in: body
           name: body
-          description: select category of transaction 
+          description: select category for this transaction 
           required: true
           schema:
-            $ref: '#/definitions/TransactionsCategory'
+            $ref: '#/definitions/TransactionCategory'
       responses:
         '200':
           description: Category for transaction update successully
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/CategoryApiResponse'
         '400':
           description: Invalid Fields
+        '401':
+          description: Unauthorized Accès
+        '403':
+          description: Forbidden Accès
+        '404':
+          description: Account not found
         '500':
-          description: Internal Server Error 
+          description: Internal Server Error
   /transactions/{accountId}/{transactionId}/note:
-    post:
+    put:
       security:
         - Bearer: []
       tags:
         - Transactions Module
       summary: transaction API
-      description: API for create note in transaction
+      description: API for update note in transaction
       parameters:
         - in: path
           name: accountId
@@ -179,17 +191,23 @@ paths:
           type: string
         - in: body
           name: body
-          description: a note for transaction 
+          description: write a note for this transaction 
           required: true
           schema:
-            $ref: '#/definitions/TransactionsNote'
+            $ref: '#/definitions/TransactionNote'
       responses:
         '200':
-          description: Note at transaction add successully
+          description: Note update successully
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/NoteApiResponse'
         '400':
           description: Invalid Fields
+        '401':
+          description: Unauthorized Accès
+        '403':
+          description: Forbidden Accès
+        '404':
+          description: Account not found
         '500':
           description: Internal Server Error
 securityDefinitions:
@@ -223,6 +241,15 @@ definitions:
       password:
         type: string
         description: user password
+  TransactionCategory:
+    properties:
+      category:
+        type: string
+  TransactionNote:
+    properties:
+      note:
+        type: string
+
   ApiResponse:
     type: object
     properties:
@@ -247,13 +274,26 @@ definitions:
     properties:
       userName:
         type: string
-  TransactionsCategory:
+  accountApiResponse:
     type: object
     properties:
+       transactions:
+         type: object
+  CategoryApiResponse:
+    type: object
+    properties:
+      status:
+        type: number
+      message: 
+        type: string
       category:
         type: string
-  TransactionsNote:
+  NoteApiResponse:
     type: object
     properties:
-      note: 
+      status:
+        type: number
+      message: 
+        type: string
+      note:
         type: string
