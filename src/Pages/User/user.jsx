@@ -8,19 +8,21 @@ import { useNavigate} from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { getUserInfo } from "../../services";
 import { setProfil } from "../../reducers/profilSlice";
+// import { selectToken} from "../../utils/selector";
 import { useState } from "react";
+import compareStorage from "../../middleware/middleware";
 
 
 function User(){
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userName, setUserName] = useState('');
   const [edit, setEdit] = useState(false);
-  const token = sessionStorage.getItem('token');
-  const locToken = localStorage.getItem('token');
-  const navigate = useNavigate();
+  const token = compareStorage();
+
   
 
 
@@ -37,11 +39,10 @@ function User(){
   
 
   useEffect(() => {
-    if(token === null && locToken === null){
+    if(token === null){
       navigate('/logIn');
     }
-     getDatas(); 
-    
+     getDatas();  
   })
 
     return(

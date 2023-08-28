@@ -1,51 +1,29 @@
 import { useState } from "react";
-import { useNavigate} from "react-router-dom"
 import styles from './style/form.module.css';
 import { useDispatch, useSelector} from 'react-redux';
-import { setProfil, setError } from '../../reducers/profilSlice';
-import { logUser } from "../../services";
-import { selectError } from "../../utils/selector";
+import { logIn} from '../../reducers/profilSlice';
+import {  selectError, selectLoading } from "../../utils/selector";
+
 
 
 function Form(){
-  const navigate = useNavigate();
   const error = useSelector(selectError);
+  const loading = useSelector(selectLoading);
   const dispatch = useDispatch();
   const [email, setEmail ] = useState('');
   const [password, setPassword] = useState('');
   const [checked, setChecked] = useState(false);
-  
  
-  async function logIn(e){
-    e.preventDefault();
-    const emailUser = email;
-    const passwordUser = password;
-    const infoUser = {
-        email: emailUser,
-        password: passwordUser
+  const infoUser = {
+        email: email,
+        password: password,
+        checked: checked,
     };
-    const identify = JSON.stringify(infoUser);
-  await logUser(identify).then(data => {
-      const generateToken = data.body?.token;
-      if(data.status !== 200){
-        dispatch(setError(true))
-      }
-      else if(data.status === "401" || data.status === "403"){
-        navigate('/logIn');
-      } 
-      else if(checked === false){
-      sessionStorage.setItem('token', generateToken);
-      navigate('/profil');
-      dispatch(setError(false))
-      }
-      else if (checked === true){
-        localStorage.setItem('token', generateToken);
-        navigate('/profil');
-        dispatch(setError(false));
-      }
-      
-      dispatch(setProfil({email, password}));     
-  })
+  const identify = JSON.stringify(infoUser);
+ 
+  async function handleLoginEvent(e){
+    e.preventDefault();
+    dispatch(logIn(identify)); 
 }
     return(
         <form>
@@ -64,7 +42,7 @@ function Form(){
             <input type="checkbox" id="remember-me" onChange={() => setChecked(!checked)}/>
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <button className={styles.signInButton} onClick={logIn}>Sign In</button>
+          <button className={styles.signInButton} onClick={handleLoginEvent}>{loading ? "loading..." : "Sign in"}</button>
         </form>
     )
 }

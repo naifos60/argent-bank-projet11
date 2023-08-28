@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import compareStorage from './middleware/middleware'
 
 
+
 async function logUser(infoUser) {
     const request = await fetch('http://localhost:3001/api/v1/user/login',{
         method : "POST",
@@ -12,7 +13,7 @@ async function logUser(infoUser) {
         body: infoUser
     })
     const result = await request.json();
-    return result;
+    return result
 }
 
 async function changeUserName(userName){

@@ -1,8 +1,14 @@
 import Form from "../../components/Form/form";
 import styles from './style/signIn.module.css';
 import indexStyles from '../../index.module.css';
+import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../utils/selector";
+
 
 function SignIn(){
+  const token = useSelector(selectToken);
+  if(!token){
     return(
       <div className="sign-in">
          <main className= {indexStyles.bgDark}>
@@ -13,7 +19,10 @@ function SignIn(){
             </section>
          </main>
       </div>
-      ) 
+      )}
+      else{
+        return <Navigate to="/profil" />;
+      }
     }
 
 export default SignIn;

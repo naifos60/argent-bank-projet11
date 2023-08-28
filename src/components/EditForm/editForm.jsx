@@ -23,8 +23,8 @@ function EditForm({firstName, lastName}){
             <input type="text" id="lastName" placeholder={lastName} disabled/>
         </div>
         <div className={styles.editButtonWrapper}>
-            <button className={styles.editButton} onClick={(e) => {e.preventDefault(); changeUserName(userName); window.location.reload('/user')}}>Save</button>
-            <button className={styles.editButton} onClick={(e) =>{e.preventDefault(); window.location.reload('/user')}}>Cancel</button>
+            <button className={styles.editButton} onClick={(e) => {e.preventDefault(); changeUserName(userName); window.location.reload('/profil')}}>Save</button>
+            <button className={styles.editButton} onClick={(e) =>{e.preventDefault(); window.location.reload('/profil')}}>Cancel</button>
         </div>
             </form>
         </div>
