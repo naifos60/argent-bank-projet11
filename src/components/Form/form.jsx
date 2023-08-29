@@ -23,7 +23,7 @@ function Form(){
  
   async function handleLoginEvent(e){
     e.preventDefault();
-    dispatch(logIn(identify)); 
+    dispatch(logIn(identify));
 }
     return(
         <form>

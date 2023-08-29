@@ -3,23 +3,21 @@ import EditForm from "../../components/EditForm/editForm";
 import styles from './style/user.module.css';
 import indexStyles from '../../index.module.css';
 import headerStyles from '../../components/Header/style/header.module.css';
-import { useEffect } from 'react';
+import { useEffect, useState  } from 'react';
 import { useNavigate} from "react-router-dom";
-import { useDispatch } from 'react-redux';
 import { getUserInfo } from "../../services";
-import { setProfil } from "../../reducers/profilSlice";
-// import { selectToken} from "../../utils/selector";
-import { useState } from "react";
 import compareStorage from "../../middleware/middleware";
+import { setProfil } from "../../reducers/profilSlice";
+import { useDispatch } from "react-redux";
 
 
 function User(){
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [userName, setUserName] = useState('');
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState(null);
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [userName, setUserName] = useState(null);
   const [edit, setEdit] = useState(false);
   const token = compareStorage();
 
@@ -27,23 +25,26 @@ function User(){
 
 
   
-   async function getDatas(){
-    await getUserInfo().then(data => {
-        setEmail(data.body?.email);
-        setFirstName(data.body?.firstName);
-        setLastName(data.body?.lastName);
-        setUserName(data.body?.userName); 
-      },
-      dispatch(setProfil({email, firstName, lastName, userName}))
-    )};
+   
   
 
   useEffect(() => {
     if(token === null){
       navigate('/logIn');
     }
-     getDatas();  
-  })
+    async function getDatas(){
+      await getUserInfo().then(data => {
+          setEmail(data.body?.email);
+          console.log(email, firstName, lastName, userName);
+          setFirstName(data.body?.firstName);
+          setLastName(data.body?.lastName);
+          setUserName(data.body?.userName);
+          dispatch(setProfil({email, firstName, lastName, userName}))
+        },
+      )}
+      getDatas(); 
+    });
+  
 
     return(
       <div className={styles.user}>

@@ -1,11 +1,19 @@
 import { useState } from "react";
 import styles from './style/editForm.module.css';
-import { changeUserName } from "../../services";
 import PropTypes  from "prop-types";
+import { changeTheUserName } from "../../reducers/profilSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLoading } from "../../utils/selector"
 
 function EditForm({firstName, lastName}){
     const [userName, setUserName] = useState('');
+    const loading = useSelector(selectLoading);
+    const dispatch = useDispatch();
 
+    async function handleChangeUserNameEvent(e){
+        e.preventDefault();
+        dispatch(changeTheUserName(userName));
+    }
     return(
         <div className={styles.editFormWrapper}>
             <form className={styles.editForm}>
@@ -23,7 +31,7 @@ function EditForm({firstName, lastName}){
             <input type="text" id="lastName" placeholder={lastName} disabled/>
         </div>
         <div className={styles.editButtonWrapper}>
-            <button className={styles.editButton} onClick={(e) => {e.preventDefault(); changeUserName(userName); window.location.reload('/profil')}}>Save</button>
+            <button className={styles.editButton} onClick={(e) => {handleChangeUserNameEvent(e); window.location.reload('/profil')}}>{loading ? "loading..." : "Save"}</button>
             <button className={styles.editButton} onClick={(e) =>{e.preventDefault(); window.location.reload('/profil')}}>Cancel</button>
         </div>
             </form>

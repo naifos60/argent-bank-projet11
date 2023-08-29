@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { logUser } from "../services";
+import { changeUserName,logUser } from "../services";
 
 
 const initialState = {
@@ -13,8 +13,9 @@ export const logIn = createAsyncThunk(
     'profil/logIn',
     async (identify) => {
       const result = await logUser(identify).then(data => {
-        const token = data.body?.token;
+        const token = data.body?.token;  
         if(identify.checked){
+        
         localStorage.setItem('token', token);
         }
         console.log(identify.checked);
@@ -24,6 +25,14 @@ export const logIn = createAsyncThunk(
     })
     return result;
 });
+
+export const changeTheUserName = createAsyncThunk(
+  'profil/changeTheUserName',
+  async (userName) => {
+    const result = await changeUserName(userName);
+    return result;
+  }
+)
 
 const profilSlice = createSlice({
     name: 'profil',
@@ -55,6 +64,22 @@ const profilSlice = createSlice({
           state.error = false;
         })
         builder.addCase(logIn.rejected, (state) => {
+          state.isLoading = false;
+          state.user = null;
+          state.error = true;
+        })
+        builder.addCase(changeTheUserName.pending, (state) => {
+          state.isLoading = true;
+          state.user = null;
+          state.error = false;
+        })
+        builder.addCase(changeTheUserName.fulfilled, (state, {payload}) => {
+          console.log(payload)
+          state.isLoading = false;
+          state.user = payload.body?.userName;
+          state.error = false;
+        })
+        builder.addCase(changeTheUserName.rejected, (state) => {
           state.isLoading = false;
           state.user = null;
           state.error = true;

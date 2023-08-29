@@ -21,9 +21,9 @@ function Header(){
   }
   async function getDatas(){
     await getUserInfo().then(data => {
-        setUserName(data.body?.userName); 
+        setUserName(data.body?.userName);
+        console.log(userName)
       },
-      dispatch(setProfil({userName}))
     )};
   
 

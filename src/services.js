@@ -47,7 +47,7 @@ async function getUserInfo(){
         },
     })
      if(request.status === "401" || request.status === "403"){
-        navigate('/signIn');
+        navigate('/logIn');
     }
     const result = await request.json();
     return result;
