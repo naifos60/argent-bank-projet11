@@ -1,8 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
-import { getUserInfo } from "../../services";
 import { useDispatch, useSelector } from 'react-redux';
-import { setProfil, setToken, setTheUserName } from "../../reducers/profilSlice";
-import { useEffect} from 'react';
+import { setProfil, setTheUserName, setToken} from "../../reducers/profilSlice";
 import logo from "../../asset/img/argentBankLogo.webp";
 import styles from './style/header.module.css';
 import compareStorage from "../../middleware/middleware";
@@ -19,20 +17,8 @@ function Header(){
   const resetState = () => {
     dispatch(setProfil(null));
     dispatch(setToken(null));
+    dispatch(setTheUserName(null));
   }
-  async function getDatas(){
-    await getUserInfo().then(data => {
-        dispatch(setTheUserName(data.body?.userName));
-        console.log(userName)
-      },
-    )};
-  
-
-  useEffect(() => {
-    if(token !== null){
-    getDatas();
-    } 
-  })
 
   if (token === null ){
     return(

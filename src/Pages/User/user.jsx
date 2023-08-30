@@ -7,7 +7,7 @@ import { useEffect, useState  } from 'react';
 import { useNavigate} from "react-router-dom";
 import { getUserInfo } from "../../services";
 import compareStorage from "../../middleware/middleware";
-import { setProfil } from "../../reducers/profilSlice";
+import { setProfil, setTheUserName } from "../../reducers/profilSlice";
 import { useDispatch } from "react-redux";
 
 
@@ -35,7 +35,8 @@ function User(){
           setFirstName(data.body?.firstName);
           setLastName(data.body?.lastName);
           setUserName(data.body?.userName);
-          dispatch(setProfil({email, firstName, lastName, userName}))
+          dispatch(setProfil({email, firstName, lastName}))
+          dispatch(setTheUserName(userName));
         },
       )}
       getDatas(); 
