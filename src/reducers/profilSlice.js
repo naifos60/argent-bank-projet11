@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { useNavigate } from 'react-router-dom';
 import { changeUserName,getUserInfo,logUser } from "../services";
-
+import { useDispatch } from 'react-redux';
 
 const initialState = {
    firstName: null,
@@ -10,6 +11,8 @@ const initialState = {
    isLoading: false,
    token: null,
 }
+const dispatch = useDispatch;
+const navigate = useNavigate;
 
 export const logIn = createAsyncThunk(
     'profil/logIn',
@@ -39,6 +42,12 @@ export const changeTheUserName = createAsyncThunk(
     if(result.status === 200){
       return result;
     }
+    else if(result.status === 401 || result.status === 403){
+      localStorage.clear();
+      sessionStorage.clear();
+      dispatch(setToken(null));
+      navigate('/logIn');
+    }
     else{
       throw new Error(result.message);
     }
@@ -51,6 +60,12 @@ export const getUser = createAsyncThunk(
     if(result.status === 200){
       return result;
     }
+    else if(result.status === 401 || result.status === 403){
+      localStorage.clear();
+      sessionStorage.clear();
+      dispatch(setToken(null));
+      navigate('/logIn');
+    }  
     throw new Error(result.message);
 });
 

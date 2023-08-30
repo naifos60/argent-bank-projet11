@@ -23,8 +23,10 @@ function User(){
     if(token === null){
       navigate('/logIn');
     }
-    dispatch(getUser()); 
-    },[]);
+    else if(firstName === null){
+    dispatch(getUser());
+    } 
+  },[]);
 
     function handleSubmit(){
       setEdit(!edit);
