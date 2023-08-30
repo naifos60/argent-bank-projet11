@@ -1,24 +1,26 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { setProfil, setTheUserName, setToken} from "../../reducers/profilSlice";
+import { setUserName, setToken, setFirstName, setLastName } from "../../reducers/profilSlice";
 import logo from "../../asset/img/argentBankLogo.webp";
 import styles from './style/header.module.css';
 import compareStorage from "../../middleware/middleware";
-import { selectTheUserName } from "../../utils/selector";
+import { selectUserName } from "../../utils/selector";
 
 
 function Header(){
   const redirect = () => (navigate("/"));
   const navigate = useNavigate();
   const dispatch= useDispatch();
-  const userName = useSelector(selectTheUserName);
+  const userName = useSelector(selectUserName);
   const token = compareStorage();
 
   const resetState = () => {
-    dispatch(setProfil(null));
+    dispatch(setFirstName(null));
+    dispatch(setLastName(null))
     dispatch(setToken(null));
-    dispatch(setTheUserName(null));
+    dispatch(setUserName(null));
   }
+
 
   if (token === null ){
     return(

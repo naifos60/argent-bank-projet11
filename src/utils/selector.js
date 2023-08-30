@@ -1,6 +1,8 @@
-export const selectProfil = (state) => state.profil.user
+export const selectFirstName = (state) => state.profil.firstName
 
-export const selectTheUserName = (state) => state.profil.userName
+export const selectLastName = (state) => state.profil.lastName
+
+export const selectUserName = (state) => state.profil.userName
 
 export const selectError = ( state) => state.profil.error
 

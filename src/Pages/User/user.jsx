@@ -5,42 +5,26 @@ import indexStyles from '../../index.module.css';
 import headerStyles from '../../components/Header/style/header.module.css';
 import { useEffect, useState  } from 'react';
 import { useNavigate} from "react-router-dom";
-import { getUserInfo } from "../../services";
 import compareStorage from "../../middleware/middleware";
-import { setProfil, setTheUserName } from "../../reducers/profilSlice";
-import { useDispatch } from "react-redux";
+import { getUser} from "../../reducers/profilSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFirstName, selectLastName } from "../../utils/selector";
 
 
 function User(){
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [email, setEmail] = useState(null);
-  const [firstName, setFirstName] = useState(null);
-  const [lastName, setLastName] = useState(null);
-  const [userName, setUserName] = useState(null);
+  const firstName = useSelector(selectFirstName);
+  const lastName = useSelector(selectLastName);
   const [edit, setEdit] = useState(false);
   const token = compareStorage();
-  
-   
-  
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if(token === null){
       navigate('/logIn');
     }
-    async function getDatas(){
-      await getUserInfo().then(data => {
-          setEmail(data.body?.email);
-          console.log(email, firstName, lastName, userName);
-          setFirstName(data.body?.firstName);
-          setLastName(data.body?.lastName);
-          setUserName(data.body?.userName);
-          dispatch(setProfil({email, firstName, lastName}))
-          dispatch(setTheUserName(userName));
-        },
-      )}
-      getDatas(); 
-    });
+    dispatch(getUser()); 
+    },[]);
 
     function handleSubmit(){
       setEdit(!edit);
