@@ -1,18 +1,19 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getUserInfo } from "../../services";
-import { useDispatch } from 'react-redux';
-import { setProfil, setToken } from "../../reducers/profilSlice";
-import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProfil, setToken, setTheUserName } from "../../reducers/profilSlice";
+import { useEffect} from 'react';
 import logo from "../../asset/img/argentBankLogo.webp";
 import styles from './style/header.module.css';
 import compareStorage from "../../middleware/middleware";
+import { selectTheUserName } from "../../utils/selector";
 
 
 function Header(){
   const redirect = () => (navigate("/"));
   const navigate = useNavigate();
   const dispatch= useDispatch();
-  const [userName, setUserName] = useState('');
+  const userName = useSelector(selectTheUserName);
   const token = compareStorage();
 
   const resetState = () => {
@@ -21,7 +22,7 @@ function Header(){
   }
   async function getDatas(){
     await getUserInfo().then(data => {
-        setUserName(data.body?.userName);
+        dispatch(setTheUserName(data.body?.userName));
         console.log(userName)
       },
     )};
@@ -37,19 +38,19 @@ function Header(){
     return(
     <header className={styles.header}>
         <nav className={styles.headerMainNav}>
-        <a className={styles.headerMainNavItemLogo} href="./"> 
+        <Link to={"./"} className={styles.headerMainNavItemLogo} > 
         <img
           className={styles.headerMainNavItemLogoImage}
           src={logo}
           alt="Argent Bank Logo"
         />
         <h1 className={styles.srOnly}>Argent Bank</h1>
-      </a>
+      </Link>
       <div>
-        <a className={styles.headerMainNavItem} href="./logIn">
+        <Link to={"./logIn"} className={styles.headerMainNavItem} >
           <i className="fa fa-user-circle"></i>
           Sign In
-        </a>
+        </Link>
       </div>
     </nav>
     </header>
@@ -59,20 +60,20 @@ function Header(){
         return (
             <header className={styles.header}>
                 <nav className={styles.headerMainNav}>
-                <a className={styles.headerMainNavItemLogo} href="./"> 
+                <Link to={"./"} className={styles.headerMainNavItemLogo} > 
                 <img
                   className={styles.headerMainNavItemLogoImage}
                   src={logo}
                   alt="Argent Bank Logo"
                 />
                 <h1 className={styles.srOnly}>Argent Bank</h1>
-                </a>
+                </Link>
                 <div>
-                  <a className={styles.headerMainNavItem} href="./profil">
+                  <Link to={"./profil"} className={styles.headerMainNavItem} >
                   <i className="fa fa-user-circle"></i>
                     {`${userName}`}
-                  </a>
-                  <a className={styles.headerMainNavItem} href="./" onClick={(e) => {
+                  </Link>
+                  <Link to={"./"} className={styles.headerMainNavItem}  onClick={(e) => {
                     e.preventDefault();
                     sessionStorage.clear();
                     localStorage.clear();
@@ -81,7 +82,7 @@ function Header(){
                     }}>
                   <i className="fa fa-sign-out"></i>
                     Sign Out
-                  </a>
+                  </Link>
                 </div>
               </nav>
             </header>

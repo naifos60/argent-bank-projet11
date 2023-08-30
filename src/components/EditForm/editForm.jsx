@@ -5,7 +5,7 @@ import { changeTheUserName } from "../../reducers/profilSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLoading } from "../../utils/selector"
 
-function EditForm({firstName, lastName}){
+function EditForm({firstName, lastName, submit}){
     const [userName, setUserName] = useState('');
     const loading = useSelector(selectLoading);
     const dispatch = useDispatch();
@@ -31,8 +31,8 @@ function EditForm({firstName, lastName}){
             <input type="text" id="lastName" placeholder={lastName} disabled/>
         </div>
         <div className={styles.editButtonWrapper}>
-            <button className={styles.editButton} onClick={(e) => {handleChangeUserNameEvent(e); window.location.reload('/profil')}}>{loading ? "loading..." : "Save"}</button>
-            <button className={styles.editButton} onClick={(e) =>{e.preventDefault(); window.location.reload('/profil')}}>Cancel</button>
+            <button className={styles.editButton} onClick={(e) => {handleChangeUserNameEvent(e); submit();}}>{loading ? "loading..." : "Save"}</button>
+            <button className={styles.editButton} onClick={(e) =>{e.preventDefault(); submit()}}>Cancel</button>
         </div>
             </form>
         </div>
@@ -42,6 +42,7 @@ function EditForm({firstName, lastName}){
 EditForm.propsTypes = {
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
+    submit : PropTypes.func.isRequired,
   }
 
 export default EditForm;

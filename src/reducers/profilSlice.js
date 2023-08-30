@@ -4,6 +4,7 @@ import { changeUserName,logUser } from "../services";
 
 const initialState = {
    user: null,
+   userName: null,
    error: false,
    isLoading: false,
    token: null,
@@ -15,15 +16,20 @@ export const logIn = createAsyncThunk(
       const result = await logUser(identify).then(data => {
         const token = data.body?.token;  
         if(identify.checked){
-        
         localStorage.setItem('token', token);
         }
         console.log(identify.checked);
         sessionStorage.setItem('token', token);
-        return data
-        
+
+        return data   
     })
-    return result;
+    if(result.status === 200){
+      return result;
+    }
+    else{
+      throw new Error(result.message);
+    }
+    
 });
 
 export const changeTheUserName = createAsyncThunk(
@@ -40,6 +46,9 @@ const profilSlice = createSlice({
     reducers: {
         setProfil: (state, {payload}) => {
             state.user = payload
+        },
+        setTheUserName: (state, {payload}) => {
+          state.userName = payload
         },
         setError: (state, {payload}) => {
             state.error = payload
@@ -76,7 +85,7 @@ const profilSlice = createSlice({
         builder.addCase(changeTheUserName.fulfilled, (state, {payload}) => {
           console.log(payload)
           state.isLoading = false;
-          state.user = payload.body?.userName;
+          state.userName = payload.body?.userName;
           state.error = false;
         })
         builder.addCase(changeTheUserName.rejected, (state) => {
@@ -87,5 +96,5 @@ const profilSlice = createSlice({
       }
 })
 
-export const {setProfil, setError, setIsLoading, setToken} = profilSlice.actions;
+export const {setProfil, setError, setIsLoading, setToken, setTheUserName} = profilSlice.actions;
 export default profilSlice.reducer;
