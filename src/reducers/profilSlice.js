@@ -19,7 +19,6 @@ export const logIn = createAsyncThunk(
         if(identify.checked){
         localStorage.setItem('token', token);
         }
-        console.log(identify.checked);
         sessionStorage.setItem('token', token);
 
         return data   
@@ -87,7 +86,6 @@ const profilSlice = createSlice({
           state.error = false;
         })
         builder.addCase(logIn.fulfilled, (state, {payload}) => {
-          console.log(payload)
           state.isLoading = false;
           state.token = payload.body?.token;
           state.error = false;
