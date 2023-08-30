@@ -16,9 +16,9 @@ function Header(){
 
   const resetState = () => {
     dispatch(setFirstName(null));
-    dispatch(setLastName(null))
-    dispatch(setToken(null));
+    dispatch(setLastName(null));
     dispatch(setUserName(null));
+    dispatch(setToken(null));
   }
 
 

@@ -63,7 +63,7 @@ const profilSlice = createSlice({
             state.firstName = payload
         },
         setLastName: (state, {payload}) => {
-          state.firstName = payload
+          state.lastName = payload
       },
         setUserName: (state, {payload}) => {
           state.userName = payload
