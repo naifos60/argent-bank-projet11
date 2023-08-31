@@ -312,8 +312,20 @@ definitions:
   accountApiResponse:
     type: object
     properties:
-       transactions:
-         type: object
+      transactions:
+        type: object
+        properties:
+          transaction:
+            type: object
+            properties:
+              date:
+                type: string
+              description:
+                type: string
+              amount: 
+                type: string
+              balance:
+                type: number
   CategoryApiResponse:
     type: object
     properties:

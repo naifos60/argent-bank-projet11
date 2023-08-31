@@ -10,15 +10,23 @@ const initialState = {
    error: false,
    isLoading: false,
    token: null,
-   checked: false,
 }
 const dispatch = useDispatch;
 const navigate = useNavigate;
-
+/**
+ * cette fonction appel l'API login est retourne le token . L'état de la requête est verifier durant l'appel .
+ */
 export const logIn = createAsyncThunk(
     'profil/logIn',
     async (identify) => {
       const result = await logUser(identify).then(data => {
+        const check = JSON.parse(identify);
+        const token = data.body?.token;
+      console.log(check.checked);
+      if(check.checked === true){
+        localStorage.setItem('token', token);
+      }
+        sessionStorage.setItem('token', token)
 
         return data   
     })
@@ -30,6 +38,10 @@ export const logIn = createAsyncThunk(
     }
     
 });
+
+/**
+ * cette fonction effectue une requête POST à l'API Profil  est retourne  . L'état de la requête est verifier durant l'appel .
+ */
 
 export const changeTheUserName = createAsyncThunk(
   'profil/changeTheUserName',
@@ -87,9 +99,6 @@ const profilSlice = createSlice({
         setToken: (state, {payload}) => {
             state.token = payload
         },
-        setChecked: (state, {payload}) => {
-            state.checked = payload
-        }
     },
     extraReducers: (builder) => {
         builder.addCase(logIn.pending, (state) => {
@@ -152,5 +161,5 @@ const profilSlice = createSlice({
       }
 })
 
-export const {setFirstName,setLastName, setError, setIsLoading, setToken, setUserName, setChecked} = profilSlice.actions;
+export const {setFirstName,setLastName, setError, setIsLoading, setToken, setUserName} = profilSlice.actions;
 export default profilSlice.reducer;

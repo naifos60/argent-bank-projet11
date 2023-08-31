@@ -9,5 +9,3 @@ export const selectError = ( state) => state.profil.error
 export const selectLoading = (state) => state.profil.isLoading
 
 export const selectToken = (state) => state.profil.token
-
-export const selectChecked = (state) => state.profil.checked
