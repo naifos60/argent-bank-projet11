@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from './style/form.module.css';
 import { useDispatch, useSelector} from 'react-redux';
-import { logIn} from '../../reducers/profilSlice';
-import {  selectError, selectLoading } from "../../utils/selector";
+import { logIn, setChecked} from '../../reducers/profilSlice';
+import {  selectChecked, selectError, selectLoading, selectToken } from "../../utils/selector";
 
 
 
@@ -12,19 +12,26 @@ function Form(){
   const dispatch = useDispatch();
   const [email, setEmail ] = useState('');
   const [password, setPassword] = useState('');
-  const [checked, setChecked] = useState(false);
+  const checked = useSelector(selectChecked);
+  
  
   const infoUser = {
-        email: email,
-        password: password,
-        checked: checked,
-    };
+      email: email,
+      password: password,
+  };
   const identify = JSON.stringify(infoUser);
  
   async function handleLoginEvent(e){
     e.preventDefault();
-    dispatch(logIn(identify));
-}
+    dispatch(logIn(identify)).then(result => {
+      const token = result.payload.body?.token;
+      console.log(result.payload.body?.token);
+      if(checked === true){
+        localStorage.setItem('token', token);
+      }
+        sessionStorage.setItem('token', token)
+    })
+  }
     return(
         <form>
           <div className={styles.inputWrapper}>
@@ -39,7 +46,7 @@ function Form(){
           <p className={styles.errorMessage}>* Erreur dans l’identifiant ou le mot de passe</p>
           </div>
           <div className={styles.inputRemember}>
-            <input type="checkbox" id="remember-me" onChange={() => setChecked(!checked)}/>
+            <input type="checkbox" id="remember-me" onChange={() => dispatch(setChecked(!checked))}/>
             <label htmlFor="remember-me">Remember me</label>
           </div>
           <button className={styles.signInButton} onClick={handleLoginEvent}>{loading ? "loading..." : "Sign in"}</button>

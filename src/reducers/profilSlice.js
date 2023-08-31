@@ -10,6 +10,7 @@ const initialState = {
    error: false,
    isLoading: false,
    token: null,
+   checked: false,
 }
 const dispatch = useDispatch;
 const navigate = useNavigate;
@@ -18,11 +19,6 @@ export const logIn = createAsyncThunk(
     'profil/logIn',
     async (identify) => {
       const result = await logUser(identify).then(data => {
-        const token = data.body?.token;  
-        if(identify.checked){
-        localStorage.setItem('token', token);
-        }
-        sessionStorage.setItem('token', token);
 
         return data   
     })
@@ -90,6 +86,9 @@ const profilSlice = createSlice({
         },
         setToken: (state, {payload}) => {
             state.token = payload
+        },
+        setChecked: (state, {payload}) => {
+            state.checked = payload
         }
     },
     extraReducers: (builder) => {
@@ -153,5 +152,5 @@ const profilSlice = createSlice({
       }
 })
 
-export const {setFirstName,setLastName, setError, setIsLoading, setToken, setUserName} = profilSlice.actions;
+export const {setFirstName,setLastName, setError, setIsLoading, setToken, setUserName, setChecked} = profilSlice.actions;
 export default profilSlice.reducer;
