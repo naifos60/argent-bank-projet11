@@ -1,6 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserName, setToken, setFirstName, setLastName } from "../../reducers/profilSlice";
+import { setUserName, setToken, setFirstName, setLastName} from "../../reducers/profilSlice";
 import logo from "../../asset/img/argentBankLogo.webp";
 import styles from './style/header.module.css';
 import compareStorage from "../../middleware/middleware";

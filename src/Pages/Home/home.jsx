@@ -6,10 +6,25 @@ import securityIcon from "../../asset/img/icon-security.webp";
 import styles from './style/home.module.css';
 import featureStyles from '../../components/Feature/style/feature.module.css';
 import headerStyles from '../../components/Header/style/header.module.css';
+import { useEffect,  } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import compareStorage from "../../middleware/middleware";
+import { selectUserName } from "../../utils/selector";
+import { getUser } from "../../reducers/profilSlice";
+
 
 
 
 function Home() {
+  const dispatch = useDispatch();
+  const token = compareStorage();
+  const userName = useSelector(selectUserName);
+  useEffect(() => {
+    if(token !== null && userName === null){
+      dispatch(getUser());
+    }
+  },[])
+  
     return (
       <div className={styles.home}>
          <Hero />
