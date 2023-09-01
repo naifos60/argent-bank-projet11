@@ -2,7 +2,9 @@ import { useNavigate } from "react-router-dom"
 import compareStorage from './middleware/middleware'
 
 
-
+/**
+  * Cette fonction fait appel à l'API login et retourne le JWT si les identifiants envoyé sont correctes.
+  */
 async function logUser(infoUser) {
     const request = await fetch('http://localhost:3001/api/v1/user/login',{
         method : "POST",
@@ -16,6 +18,9 @@ async function logUser(infoUser) {
     return result
 }
 
+/**
+  * Cette fonction fait appel à l'API Profil et modifie le userName de l'utilisateur .
+  */
 async function changeUserName(userName){
     const token = compareStorage();
     const modifUserName = {
@@ -36,6 +41,9 @@ async function changeUserName(userName){
     return result
 };
 
+/**
+  * Cette fonction fait appel à l'API Profil et retourne les informations de l'utilisateur .
+  */
 async function getUserInfo(){
     const token = compareStorage();
     const navigate = useNavigate;

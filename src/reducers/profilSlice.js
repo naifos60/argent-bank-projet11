@@ -40,7 +40,7 @@ export const logIn = createAsyncThunk(
 });
 
 /**
- * cette fonction effectue une requête POST à l'API Profil  est retourne  . L'état de la requête est verifier durant l'appel .
+ * cette fonction effectue une requête PUT à l'API Profil  et retourne les informations de l'utilisateur avec le userName modifié  . L'état de la requête est verifier durant l'appel .
  */
 
 export const changeTheUserName = createAsyncThunk(
@@ -61,6 +61,10 @@ export const changeTheUserName = createAsyncThunk(
     }
 });
 
+
+/**
+ * cette fonction effectue une requête POST à l'API Profil  et retourne les informations de l'utilisateur . L'état de la requête est verifier durant l'appel .
+ */
 export const getUser = createAsyncThunk(
   'profil/getUser',
   async () => {
@@ -76,6 +80,12 @@ export const getUser = createAsyncThunk(
     }  
     throw new Error(result.message);
 });
+
+
+/**
+ * Le profilSlice prend en paramètre l'état initial de notre application, séléctionne un état en particulier grace au reducer et  met à jour cette état grace au paramétre transmis dans le payload ou action.
+ * l'extra reducers quand à lui gère l'état de nos requête à l'API et met à jours nos différent état en fonction de l'état de la requête (pending, fulfilled, rejected).
+ */
 
 const profilSlice = createSlice({
     name: 'profil',

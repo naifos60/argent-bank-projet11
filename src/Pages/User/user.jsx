@@ -28,6 +28,9 @@ function User(){
     } 
   },[]);
 
+  /**
+  * Cette fonction modifie l'état edit de notre page afin d'afficher ou de cacher le formulaire de modification du userName.
+  */
     function handleSubmit(){
       setEdit(!edit);
     }

@@ -21,7 +21,10 @@ function Form(){
       checked: checked,
   };
   const identify = JSON.stringify(infoUser);
- 
+ /**
+  * Cette fonction fait appel au middleware asyncthunk qui envoie les infos user à l'API Login et gère l'état de la requête.
+  * Elle inclue l'état checked dans son paramètre afin de transmettre à la fonction logIn si l'utilisateur souhaite qu'on ce souvienne de lui.
+  */
   async function handleLoginEvent(e){
     e.preventDefault();
     dispatch(logIn(identify));
