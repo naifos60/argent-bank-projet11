@@ -21,7 +21,7 @@ function SignIn(){
       </div>
       )}
       else{
-        return <Navigate to="/profil" />;
+        return <Navigate to="/profile" />;
       }
     }
 

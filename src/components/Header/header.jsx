@@ -60,7 +60,7 @@ function Header(){
                 <h1 className={styles.srOnly}>Argent Bank</h1>
                 </Link>
                 <div>
-                  <Link to={"./profil"} className={styles.headerMainNavItem} >
+                  <Link to={"./profile"} className={styles.headerMainNavItem} >
                   <i className="fa fa-user-circle"></i>
                     {`${userName}`}
                   </Link>

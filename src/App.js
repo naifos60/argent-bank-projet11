@@ -17,7 +17,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/logIn' element={<SignIn />} />
-            <Route path='/profil' element={<User />} />
+            <Route path='/profile' element={<User />} />
             <Route path='*' element={<Error />} />
           </Routes>
           <Footer content="Copyright 2020 Argent Bank" />
