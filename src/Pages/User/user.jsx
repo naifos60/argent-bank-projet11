@@ -5,7 +5,7 @@ import indexStyles from '../../index.module.css';
 import headerStyles from '../../components/Header/style/header.module.css';
 import { useEffect, useState  } from 'react';
 import { useNavigate} from "react-router-dom";
-import compareStorage from "../../middleware/middleware";
+import compareStorage from "../../utils/compareStorage";
 import { getUser} from "../../reducers/profilSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectFirstName, selectLastName, selectUserName } from "../../utils/selector";

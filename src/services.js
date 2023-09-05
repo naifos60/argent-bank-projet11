@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import compareStorage from './middleware/middleware'
+import compareStorage from './utils/compareStorage'
 
 
 /**

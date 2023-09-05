@@ -8,7 +8,7 @@ import featureStyles from '../../components/Feature/style/feature.module.css';
 import headerStyles from '../../components/Header/style/header.module.css';
 import { useEffect,  } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import compareStorage from "../../middleware/middleware";
+import compareStorage from "../../utils/compareStorage";
 import { selectUserName } from "../../utils/selector";
 import { getUser } from "../../reducers/profilSlice";
 

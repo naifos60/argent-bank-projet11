@@ -1,7 +1,7 @@
 import styles from './style/error.module.css'
 import { useEffect,  } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import compareStorage from "../../middleware/middleware";
+import compareStorage from "../../utils/compareStorage";
 import { selectUserName } from "../../utils/selector";
 import { getUser } from "../../reducers/profilSlice";
 
