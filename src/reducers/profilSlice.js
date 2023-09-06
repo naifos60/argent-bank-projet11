@@ -22,7 +22,6 @@ export const logIn = createAsyncThunk(
       const result = await logUser(identify).then(data => {
         const check = JSON.parse(identify);
         const token = data.body?.token;
-      console.log(check.checked);
       if(check.checked === true){
         localStorage.setItem('token', token);
       }
